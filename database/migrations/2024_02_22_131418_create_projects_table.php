@@ -15,8 +15,6 @@ return new class extends Migration {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('title')->unique();
-            $table->text('description');
-            $table->string('image')->default('https://www.totel.it/images/og/portfolio.jpg');
             $table->timestamps();
         });
     }

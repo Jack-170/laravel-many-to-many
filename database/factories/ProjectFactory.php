@@ -18,7 +18,6 @@ class ProjectFactory extends Factory
     {
         return [
             'title' => fake()->unique()->sentence(4, false),
-            'description' => fake()->paragraph(3, false),
         ];
     }
 }

@@ -9,3 +9,7 @@ Route::get('/', [ProjectController::class, 'index'])->name('project.index');
 
 
 Route::get('/types', [TypeController::class, 'index'])->name('type.index');
+
+Route::get('/create', [ProjectController::class, 'create'])->name('project.create');
+
+Route::post('/create', [ProjectController::class, 'store'])->name('project.store');
