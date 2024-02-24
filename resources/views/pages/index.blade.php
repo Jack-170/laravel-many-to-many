@@ -22,6 +22,8 @@
                             @endforeach</span>
                         </p>
 
+                        <a class="btn btn-primary btn-sm" href="{{ route('project.edit', $project -> id) }}">EDIT</a>
+
                     </div>
                 </div>
             </div>
