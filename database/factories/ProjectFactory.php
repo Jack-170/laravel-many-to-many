@@ -18,6 +18,7 @@ class ProjectFactory extends Factory
     {
         return [
             'title' => fake()->unique()->sentence(4, false),
+            'image' => null,
         ];
     }
 }

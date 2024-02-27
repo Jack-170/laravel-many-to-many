@@ -10,13 +10,18 @@
 
     <div class="container">
 
-        <form class="my-5" action="{{ route('project.store') }}" method="POST">
+        <form class="my-5" action="{{ route('project.store') }}" method="POST" enctype="multipart/form-data">
 
             @csrf
             @method('POST')
 
             <label class="my-2" for="title">Title</label>
             <input type="text" name="title" id="title">
+
+            <br>
+
+            <label for="Image">Image</label>
+            <input type="file" name="image" id="image">
 
             <br>
             <label class="my-2" for="type_id">Type</label>
