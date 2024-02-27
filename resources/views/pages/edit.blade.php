@@ -11,12 +11,22 @@
             @csrf
             @method('PUT')
 
-            <!-- Campi di modifica precompilati -->
+
             <label class="my-2" for="title">Title</label>
             <input type="text" name="title" id="title" value="{{ $project->title }}">
             <br>
 
-            <label for="image">Image</label>
+
+            @if($project->image)
+                <div>
+                    <label for="current_image">Current Image:</label><br>
+                    <img src="{{ asset('storage/' . $project->image) }}" alt="Current Image" style="max-width: 200px; max-height: 200px;">
+                </div>
+                <br>
+            @endif
+
+
+            <label for="image">New Image:</label>
             <input type="file" name="image" id="image">
             <br>
 
@@ -28,7 +38,7 @@
             </select>
             <br>
 
-            <!-- Selezione delle tecnologie -->
+
             <b>Select project's technologies:</b>
             <br>
             @foreach ($technologies as $technology)
