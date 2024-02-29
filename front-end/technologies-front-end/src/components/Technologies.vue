@@ -37,9 +37,24 @@
                       </li>
                   </ul>
               </div>
+              <div>
+                <ul>
+                    <li v-for="link in pageLinks" :key="link">
+                        <button
+                            class="btn btn-dark my-3"
+                            @click="changePage(link.url)"
+                            v-html="link.label"
+                            :class="link.active ? 'bg-light' : ''"
+                        />
+                    </li>
+                </ul>
+            </div>
           </div>
       </div>
   </div>
+
+
+
 
 
 
@@ -59,6 +74,8 @@ export default{
   data (){
       return{
           technologies:[],
+          currentPage: 1,
+          pageLinks: [],
           createFormActive : false,
 
           newTechnology:{
@@ -84,7 +101,7 @@ export default{
 
               if (data.status == 'succes') {
 
-                  this.technologies.push(data.technology)
+                this.changePage('http://localhost:8000/api/v1/technologies?page=' + this.currentPage);
                   this.createFormActive = false;
               }
 
@@ -95,12 +112,10 @@ export default{
           });
 
 
-      }
+      },
+      changePage(url){
 
-  },
-  mounted (){
-
-      axios.get('http://localhost:8000/api/v1/technologies')
+        axios.get(url)
           .then(res => {
               const data = res.data;
 
@@ -109,7 +124,9 @@ export default{
 
               if (data.status == 'succes') {
 
-                  this.technologies = data.technologies.data
+                  this.currentPage = data.technologies.current_page;
+                  this.pageLinks = data.technologies.links;
+                  this.technologies = data.technologies.data;
               }
               console.log("technologies: ",(this.technologies));
 
@@ -119,8 +136,22 @@ export default{
               console.err(err);
           })
 
+      }
 
-
-  }
+  },
+  mounted() { this.changePage('http://localhost:8000/api/v1/technologies'); }
 }
 </script>
+
+
+<style scoped>
+ul {
+
+    list-style-type: none;
+}
+button.bg-light {
+
+    background-color: white;
+    color: black;
+}
+</style>
